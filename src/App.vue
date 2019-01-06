@@ -2,7 +2,7 @@
   <div id="app">
     <img src="@/assets/lover_mini.jpeg" 
          class="lover-image"
-         alt="">
+         alt="爱爱图片">
     <div class="time-box">
       <div class="time-box__text">我们相爱了</div>
       <div class="time-box__calculating">
@@ -26,7 +26,7 @@ export default {
   name: 'app',
   data() {
     return {
-      startDate: new Date('2018-05-30T18:00:00'),
+      startDate: null,
       day: '',
       hour: '',
       minute: '',
@@ -35,6 +35,11 @@ export default {
     }
   },
   created() {
+    // Get our first day
+    this.startDate = new Date()
+    this.startDate.setFullYear(2018, 4, 30)
+    this.startDate.setHours(18, 0, 0)
+
     this.update()
     this.intervalId = setInterval(() => {
       this.update()
@@ -44,6 +49,7 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
+    // Calculate the diff time
     update() {
       const between = Math.floor((Date.now() - this.startDate.getTime()) / 1000)
 
@@ -53,7 +59,6 @@ export default {
       this.second = between - this.day * (60 * 60 * 24) - this.hour * (60 * 60) - this.minute * 60;
     }
   }
-
 }
 </script>
 
